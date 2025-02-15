@@ -19,9 +19,9 @@ BEGIN
 	v_where = COALESCE(p_where, ' 1 = 1 ');
 
 	-- Write start log
-    PERFORM std9_121.f_write_log(p_log_type 	:= 'INFO',
-			                          p_log_message := 'START Insert data from table '||v_table_from||' to '||v_table_to || ' with condition: '||v_where,
-			                          p_location 	:= v_location);
+    PERFORM std9_121.f_write_log(p_log_type    := 'INFO',
+			                     p_log_message := 'START Insert data from table '||v_table_from||' to '||v_table_to || ' with condition: '||v_where,
+			                     p_location    := v_location);
 
 	-- Truncate target table if needed
 	IF p_truncate_tgt IS TRUE THEN
@@ -36,9 +36,9 @@ BEGIN
 	RAISE NOTICE '% rows inserted from % into %', v_cnt, v_table_from, v_table_to;
 
 	-- Write end log
-    PERFORM std9_121.f_write_log(p_log_type	:= 'INFO',
-	                         	 	  p_log_message := 'END Insert data from table '||v_table_from||' to '||v_table_to||', '||v_cnt||' rows inserted',
-	                          	      p_location    := v_location);
+    PERFORM std9_121.f_write_log(p_log_type    := 'INFO',
+	                         	 p_log_message := 'END Insert data from table '||v_table_from||' to '||v_table_to||', '||v_cnt||' rows inserted',
+	                          	 p_location    := v_location);
 
 	RETURN v_cnt;
 END;
