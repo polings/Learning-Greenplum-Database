@@ -12,8 +12,8 @@ DECLARE
 	v_location 		text := 'std9_121.f_load_delta_partitions';
     v_table_from    text;
     v_table_to      text;
-    v_start_date    timestamp;
-    v_end_date      timestamp;
+    v_start_date    date;
+    v_end_date      date;
     v_load_interval interval;
     v_iterDate      timestamp;
     v_where         text;
@@ -57,7 +57,7 @@ BEGIN
 		v_cnt_prt = std9_121.f_insert_table(p_table_from := v_table_from, p_table_to := v_prt_table, p_where := v_where, p_truncate_tgt := FALSE);
         v_cnt = v_cnt + v_cnt_prt;
 
-		EXECUTE  'ALTER TABLE ' || v_table_to || ' EXCHANGE PARTITION FOR (DATE ' || v_start_date || ') WITH TABLE ' || v_prt_table || ' WITH VALIDATION;';
+		EXECUTE  'ALTER TABLE ' || v_table_to || ' EXCHANGE PARTITION FOR (DATE ''' || v_start_date || ''') WITH TABLE ' || v_prt_table || ' WITH VALIDATION;';
 		EXECUTE 'DROP TABLE ' || v_prt_table;
 
         v_start_date := v_iterDate;
