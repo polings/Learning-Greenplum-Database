@@ -1,3 +1,4 @@
+-- drop function std9_121.f_create_pxf_table(text, text, text, text);
 create or replace function std9_121.f_create_pxf_table(p_table text, p_pxf_table text, p_user_id text, p_pass text)
 	returns void
 	language plpgsql
