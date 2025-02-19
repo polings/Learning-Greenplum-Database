@@ -51,12 +51,14 @@ BEGIN
 
         v_prt_table = std9_121.f_create_tmp_table(p_table_name := v_table_to, p_prefix_name := 'prt_',
                                                   p_suffix_name := '_' || to_char(v_start_date, 'YYYYMMDD'));
+        -- Insert the data
+        v_where = p_partition_key || '>=''' || v_start_date || '''::timestamp and ' || p_partition_key || '<''' || v_iterDate || '''::timestamp';
+
         -- Write insert start log
         PERFORM std9_121.f_write_log(p_log_type    := 'INFO',
                                      p_log_message := 'START Insert data from table '||v_table_from||' to '||v_prt_table || ' with condition: '||v_where,
                                      p_location    := v_location);
-        -- Insert the data
-        v_where = p_partition_key || '>=''' || v_start_date || '''::timestamp and ' || p_partition_key || '<''' || v_iterDate || '''::timestamp';
+
         v_sql := 'INSERT INTO ' || v_prt_table || '
                   SELECT bi.billnum,
                          bi.billitem,
