@@ -1,12 +1,12 @@
--- drop function std9_121.f_full_load_coupons(p_table_from text, p_table_to text, p_truncate_tgt bool);
-create or replace function std9_121.f_full_load_coupons(p_table_from text, p_table_to text, p_truncate_tgt bool DEFAULT FALSE)
+-- drop function std9_121.f_full_load_promos(p_table_from text, p_table_to text, p_truncate_tgt bool);
+create or replace function std9_121.f_full_load_promos(p_table_from text, p_table_to text, p_truncate_tgt bool DEFAULT FALSE)
 	returns int8
 	language plpgsql
 	security definer
 	volatile
 as $$
 DECLARE
-	v_location 	 text := 'std9_121.f_full_load_coupons';
+	v_location 	 text := 'std9_121.f_full_load_promos';
 	v_table_from text;
 	v_table_to 	 text;
 	v_where 	 text;
@@ -45,7 +45,7 @@ BEGIN
 			                     p_log_message := 'START Insert data from table '||v_table_from||' to '||v_table_to || ' with condition: '||v_where,
 			                     p_location    := v_location);
 	-- Insert data
-	v_sql := 'INSERT INTO '||v_table_to||' SELECT plant, TO_DATE(calday, ''YYYYMMDD''), coupon_nm, promo_id, material::BIGINT, billnum::BIGINT FROM '||v_table_from||' WHERE '||v_where;
+	v_sql := 'INSERT INTO '||v_table_to||' SELECT promo_id, txt, promo_type, material::BIGINT, discount FROM '||v_table_from||' WHERE '||v_where;
 	EXECUTE v_sql;
 
 	GET DIAGNOSTICS v_cnt = ROW_COUNT;
