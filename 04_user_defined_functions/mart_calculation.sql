@@ -9,7 +9,7 @@
 --Функция также создает представление (VIEW) на основе созданной витрины.
 select * from std9_121.f_load_mart('202101');
 
---drop function std9_121.f_load_mart(p_table_from text, p_table_to text, p_truncate_tgt bool);
+--drop function std9_121.f_load_mart(varchar);
 CREATE OR REPLACE FUNCTION std9_121.f_load_mart(p_month varchar)
 RETURNS int4
 LANGUAGE plpgsql
