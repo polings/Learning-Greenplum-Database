@@ -1,5 +1,5 @@
--- DROP FUNCTION f_create_gpfdist_table(text,text,text);
-CREATE OR REPLACE FUNCTION std9_121.f_create_gpfdist_table(p_table text, p_file_name text, p_format_param text)
+-- DROP FUNCTION f_create_gpfdist_table(text,text);
+CREATE OR REPLACE FUNCTION std9_121.f_create_gpfdist_table(p_table text, p_file_name text)
 RETURNS BOOLEAN
 LANGUAGE plpgsql
 VOLATILE
@@ -19,7 +19,7 @@ BEGIN
                                  p_log_message := 'START creating external table ' || v_ext_table || ' with gpfdist',
                                  p_location    := v_location);
     -- GPFDIST connection parameters
-    v_gpfdist = 'gpfdist://172.16.128.10:8080/' || p_file_name || '.csv';
+    v_gpfdist = 'gpfdist://172.16.128.10:8081/' || p_file_name || '.csv';
 
 	-- Creating external table
     EXECUTE 'DROP EXTERNAL TABLE IF EXISTS ' || v_ext_table;
@@ -27,7 +27,7 @@ BEGIN
             '(LIKE ' || p_table || ')
             LOCATION (''' || v_gpfdist || ''')
             ON ALL
-            FORMAT ' || p_format_param || '
+            FORMAT ''CSV'' (HEADER DELIMITER '';'' NULL '''' QUOTE ''"'')
             ENCODING ''UTF8''
 	        SEGMENT REJECT LIMIT 5 ROWS;';
 	EXECUTE v_sql;
