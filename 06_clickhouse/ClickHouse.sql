@@ -116,16 +116,3 @@ INSERT INTO std9_121.ch_plan_fact_distr SELECT * FROM std9_121.ch_plan_fact_ext;
 SELECT * FROM std9_121.ch_plan_fact_distr;
 
 SELECT * FROM std9_121.ch_plan_fact;
-
-
-
-
-
-
-
-
-
-
-
-
-
