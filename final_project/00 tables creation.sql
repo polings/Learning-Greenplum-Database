@@ -169,9 +169,8 @@ SELECT std9_121.f_create_pxf_table('bills_item', 'gp.bills_item', 'intern', 'int
 
 
 -- 2.1 Создание внешних таблиц gpfdist
---     gpfdist -d path\to\external\files -p 8080
---     gpfdist -d C:\Users\shpol\OneDrive\Documents\gpfdist -p 8080
-SELECT std9_121.f_create_gpfdist_table('std9_121.coupons', 'coupons', '''CSV'' (HEADER DELIMITER '';'' NULL '''' QUOTE ''"'')');
-SELECT std9_121.f_create_gpfdist_table('std9_121.stores', 'stores', '''CSV'' (HEADER DELIMITER '';'' NULL '''' QUOTE ''"'')');
-SELECT std9_121.f_create_gpfdist_table('std9_121.promos', 'promos', '''CSV'' (HEADER DELIMITER '';'' NULL '''' QUOTE ''"'')');
-SELECT std9_121.f_create_gpfdist_table('std9_121.promo_types', 'promo_types', '''CSV'' (HEADER DELIMITER '';'' NULL '''' QUOTE ''"'')');
+--     gpfdist -d path\to\external\files -p 8081
+SELECT std9_121.f_create_gpfdist_table('std9_121.coupons', 'coupons');
+SELECT std9_121.f_create_gpfdist_table('std9_121.stores', 'stores');
+SELECT std9_121.f_create_gpfdist_table('std9_121.promos', 'promos');
+SELECT std9_121.f_create_gpfdist_table('std9_121.promo_types', 'promo_types');
